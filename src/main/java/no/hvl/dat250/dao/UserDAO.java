@@ -26,7 +26,7 @@ public class UserDAO implements Dao<UserAccount> {
     
     @Override
     public List<UserAccount> getAll() {
-        Query query = entityManager.createQuery("SELECT e FROM User e");
+        Query query = entityManager.createQuery("SELECT * FROM USERACOUNT");
         return query.getResultList();
     }
     
@@ -40,8 +40,8 @@ public class UserDAO implements Dao<UserAccount> {
     	
         user.setUsername((String) Objects.requireNonNull(params[0], "Name cannot be null"));
         user.setEmail((String) Objects.requireNonNull(params[1], "Email cannot be null"));
-        user.setPassword((String) Objects.requireNonNull(params[3], "Password cannot be null"));
-        user.setAdmin((boolean) Objects.requireNonNull(params[1], "Admin cannot be null"));
+        user.setPassword((String) Objects.requireNonNull(params[2], "Password cannot be null"));
+        user.setAdmin((boolean) Objects.requireNonNull(params[3], "Admin cannot be null"));
         executeInsideTransaction(entityManager -> entityManager.merge(user));
     }
     
