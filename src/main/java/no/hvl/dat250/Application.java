@@ -25,7 +25,11 @@ public class Application {
         if (userList.size() == 0) {
             System.out.println("Creating user..");
             em.getTransaction().begin();
-            User user = new User("Bob", "bob@mail.com", "badpassword", false);
+            User user = new User();
+            user.setUsername("Bob");
+            user.setEmail("bob@mail.com");
+            user.setPassword("badpassword");
+            user.setAdmin(false);
             em.persist(user);
             em.getTransaction().commit();
             q = em.createQuery("select u from User u");
