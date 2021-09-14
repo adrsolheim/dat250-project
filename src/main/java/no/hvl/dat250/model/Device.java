@@ -1,9 +1,6 @@
 package no.hvl.dat250.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Device {
@@ -12,7 +9,17 @@ public class Device {
 	private Long id;
 	private int yesVote;
 	private int noVote;
-	
+	@ManyToOne
+	private Poll poll;
+
+	public Poll getPoll() {
+		return poll;
+	}
+
+	public void setPoll(Poll poll) {
+		this.poll = poll;
+	}
+
 	public int getYesVote() {
 		return this.yesVote;
 	}

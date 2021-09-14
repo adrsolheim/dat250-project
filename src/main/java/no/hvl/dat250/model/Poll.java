@@ -1,6 +1,7 @@
 package no.hvl.dat250.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Poll {
@@ -15,6 +16,19 @@ public class Poll {
 	private int duration;
 	@ManyToOne
 	private UserAccount userAccount;
+	@OneToMany(
+			mappedBy = "Poll",
+			cascade = CascadeType.ALL
+	)
+	private List<Device> deviceList;
+
+	public List<Device> getDeviceList() {
+		return deviceList;
+	}
+
+	public void setDeviceList(List<Device> deviceList) {
+		this.deviceList = deviceList;
+	}
 
 	public UserAccount getUserAccount() {
 		return userAccount;
