@@ -10,27 +10,27 @@ public class Device {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private int yes;
-	private int no;
+	private int yesVote;
+	private int noVote;
 	
-	public int getYes() {
-		return this.yes;
+	public int getYesVote() {
+		return this.yesVote;
 	}
 	
-	public void setYes(int yes) {
-		this.yes = yes;
+	public void setYesVote(int yesVote) {
+		this.yesVote = yesVote;
 	}
 	
-	public int getNo() {
-		return this.no;
+	public int getNoVote() {
+		return this.noVote;
 	}
 	
-	public void setNo(int no) {
-		this.no = no;
+	public void setNoVote(int noVote) {
+		this.noVote = noVote;
 	}
 	
 	@Override
 	public String toString() {
-		return "Device [id=" + id + ", yes=" + yes + ", no=" + no + "]";
+		return "Device [id=" + id + ", yesVote=" + yesVote + ", noVote=" + noVote + "]";
 	}
 }

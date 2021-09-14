@@ -11,8 +11,8 @@ public class Poll {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String question;
-	private int yes;
-	private int no;
+	private int yesVote;
+	private int noVote;
 	private boolean isPublic;
 	private String code;
 	private int duration;
@@ -25,20 +25,20 @@ public class Poll {
 		this.question = question;
 	}
 	
-	public int getYes() {
-		return this.yes;
+	public int getYesVote() {
+		return this.yesVote;
 	}
 	
-	public void setYes(int yes) {
-		this.yes = yes;
+	public void setYesVote(int yesVote) {
+		this.yesVote = yesVote;
 	}
 	
-	public int getNo() {
-		return this.no;
+	public int getNoVote() {
+		return this.noVote;
 	}
 	
-	public void setNo(int no) {
-		this.no = no;
+	public void setNoVote(int noVote) {
+		this.noVote = noVote;
 	}
 	
 	public boolean getIsPublic() {
@@ -67,8 +67,8 @@ public class Poll {
 	
 	@Override
 	public String toString() {
-		return "Poll [id=" + id + ", question=" + question + ", yes=" + yes + 
-				", no=" + no + ", public=" + isPublic + ", code=" + code + ", "
+		return "Poll [id=" + id + ", question=" + question + ", yesVote=" + yesVote + 
+				", noVote=" + noVote + ", public=" + isPublic + ", code=" + code + ", "
 						+ "duration=" + duration + "]";
 	}
 }
