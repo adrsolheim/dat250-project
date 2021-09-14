@@ -16,7 +16,7 @@ public class Application {
         factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
         EntityManager em = factory.createEntityManager();
         fetchUsers(em);
-
+        em.close();
     }
 
     public static void fetchUsers(EntityManager em) {
