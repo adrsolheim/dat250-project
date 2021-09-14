@@ -5,10 +5,9 @@
     <persistence-unit name="feedapp" transaction-type="RESOURCE_LOCAL">
         <class>no.hvl.dat250.model.Device</class>
         <class>no.hvl.dat250.model.Poll</class>
-        <class>no.hvl.dat250.model.User</class>
+        <class>no.hvl.dat250.model.UserAccount</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
-                      <!-- TODO Change the path in the value of the property "javax.persistence.jdbc.url" here! -->
             <property name="javax.persistence.jdbc.url"
                       value="jdbc:derby:testdb;create=true"/>
             <property name="javax.persistence.jdbc.user" value="test"/>
