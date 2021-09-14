@@ -1,9 +1,8 @@
 package no.hvl.dat250.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class UserAccount {
@@ -14,6 +13,12 @@ public class UserAccount {
     private String email;
     private String password;
     private boolean admin;
+    @OneToMany(
+            mappedBy = "UserAccount",
+            cascade = CascadeType.ALL
+    )
+    List<Poll> pollList = new ArrayList<>();
+
 
     public Long getId() {
         return id;

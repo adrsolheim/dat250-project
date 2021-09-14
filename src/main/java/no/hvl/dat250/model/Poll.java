@@ -1,9 +1,6 @@
 package no.hvl.dat250.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Poll {
@@ -16,7 +13,17 @@ public class Poll {
 	private boolean isPublic;
 	private String code;
 	private int duration;
-	
+	@ManyToOne
+	private UserAccount userAccount;
+
+	public UserAccount getUserAccount() {
+		return userAccount;
+	}
+
+	public void setUserAccount(UserAccount userAccount) {
+		this.userAccount = userAccount;
+	}
+
 	public String getQuestion() {
 		return this.question;
 	}
