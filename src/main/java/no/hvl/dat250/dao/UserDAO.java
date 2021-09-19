@@ -26,7 +26,7 @@ public class UserDAO implements Dao<UserAccount> {
     
     @Override
     public List<UserAccount> getAll() {
-        Query query = entityManager.createQuery("SELECT * FROM USERACOUNT");
+        Query query = entityManager.createQuery("select u from UserAccount u");
         return query.getResultList();
     }
     

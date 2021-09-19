@@ -27,7 +27,7 @@ public class PollDAO implements Dao<Poll> {
     
     @Override
     public List<Poll> getAll() {
-        Query query = entityManager.createQuery("SELECT * FROM POLL");
+        Query query = entityManager.createQuery("select p from Poll p");
         return query.getResultList();
     }
     
