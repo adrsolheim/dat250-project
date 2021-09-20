@@ -18,6 +18,8 @@
         <property name="javax.persistence.sql-load-script-source" value="META-INF/sql/populate-database.sql"/>
 
         <!-- This section prevents SQL Scripts from running -->
+        <!-- If its first time running project - uncomment the code below - run
+        - then comment it again then it should work normally -->
         <!--
         <property name="eclipselink.ddl-generation" value="create-tables"/>
         <property name="eclipselink.ddl-generation.output-mode" value="database"/>
