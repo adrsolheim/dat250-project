@@ -10,14 +10,17 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 import no.hvl.dat250.model.Poll;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class PollDAO implements Dao<Poll> {
-    
+
+    @Autowired
     private EntityManager entityManager;
     
     public PollDAO(EntityManager entityManager) {
-    	this.entityManager = entityManager;
+    	//this.entityManager = entityManager;
     }
     
     @Override
@@ -45,7 +48,7 @@ public class PollDAO implements Dao<Poll> {
         poll.setNoVote((int) Objects.requireNonNull(params[2], "No vote cannot be null"));
         poll.setIsPublic((boolean) Objects.requireNonNull(params[3], "isPublic cannot be null"));
         poll.setCode((String) Objects.requireNonNull(params[4], "Code cannot be null"));
-        poll.setNoVote((int) Objects.requireNonNull(params[5], "Duration cannot be null"));
+        poll.setDuration((int) Objects.requireNonNull(params[5], "Duration cannot be null"));
         executeInsideTransaction(entityManager -> entityManager.merge(poll));
     }
     
