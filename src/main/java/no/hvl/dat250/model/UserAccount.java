@@ -14,7 +14,7 @@ public class UserAccount {
     private String password;
     private boolean admin;
     @OneToMany(
-            mappedBy = "UserAccount",
+            mappedBy = "userAccount",
             cascade = CascadeType.ALL
     )
     List<Poll> pollList = new ArrayList<>();
@@ -63,4 +63,5 @@ public class UserAccount {
     public String toString() {
         return "UserAccount [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + ", admin=" + admin + "]";
     }
+
 }
