@@ -17,10 +17,26 @@ public class Poll {
 	@ManyToOne
 	private UserAccount userAccount;
 	@OneToMany(
-			mappedBy = "Poll",
+			mappedBy = "poll",
 			cascade = CascadeType.ALL
 	)
 	private List<Device> deviceList;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public boolean isPublic() {
+		return isPublic;
+	}
+
+	public void setPublic(boolean aPublic) {
+		isPublic = aPublic;
+	}
 
 	public List<Device> getDeviceList() {
 		return deviceList;
@@ -92,4 +108,5 @@ public class Poll {
 				", noVote=" + noVote + ", public=" + isPublic + ", code=" + code + ", "
 						+ "duration=" + duration + "]";
 	}
+
 }

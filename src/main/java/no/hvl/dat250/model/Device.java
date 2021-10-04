@@ -40,4 +40,5 @@ public class Device {
 	public String toString() {
 		return "Device [id=" + id + ", yesVote=" + yesVote + ", noVote=" + noVote + "]";
 	}
+
 }
