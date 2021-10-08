@@ -1,7 +1,6 @@
 package no.hvl.dat250.controller;
 
 import no.hvl.dat250.dao.PollDAO;
-import no.hvl.dat250.exceptions.PollNotFoundException;
 import no.hvl.dat250.model.Poll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
