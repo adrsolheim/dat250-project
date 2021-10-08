@@ -10,9 +10,13 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 import no.hvl.dat250.model.UserAccount;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserDAO implements Dao<UserAccount> {
-    
+
+    @Autowired
     private EntityManager entityManager;
     
     public UserDAO(EntityManager entityManager) {
