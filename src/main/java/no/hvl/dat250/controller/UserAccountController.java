@@ -38,14 +38,24 @@ public class UserAccountController {
     }
 
     @PutMapping("/users/{id}")
-    public ResponseEntity<Object> updateuser(@PathVariable("id") long id, @RequestBody UserAccount user) {
+    public ResponseEntity<Object> updateUser(@PathVariable("id") long id, @RequestBody UserAccount user) {
         Optional<UserAccount> dbuser = userDAO.get(id);
         if(!dbuser.isPresent()) {
-            return new ResponseEntity<>("Could not update. user does not exist", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Could not update. User does not exist", HttpStatus.NOT_FOUND);
         }
         Object[] params = {user.getUsername(), user.getEmail(), user.getPassword(), user.isAdmin()};
         userDAO.update(dbuser.get(), params);
         return new ResponseEntity<>("User successfully updated!", HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<Object> deleteUser(@PathVariable("id") long id) {
+        Optional<UserAccount> dbuser = userDAO.get(id);
+        if(!dbuser.isPresent()) {
+            return new ResponseEntity<>("Could not delete. User does not exist", HttpStatus.NOT_FOUND);
+        }
+        userDAO.delete(dbuser.get());
+        return new ResponseEntity<>("User successfully deleted!", HttpStatus.ACCEPTED);
     }
 
 }

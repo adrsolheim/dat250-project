@@ -52,6 +52,16 @@ public class PollController {
         return new ResponseEntity<>("Poll successfully updated!", HttpStatus.ACCEPTED);
     }
 
+    @DeleteMapping("/polls/{id}")
+    public ResponseEntity<Object> deletePoll(@PathVariable("id") long id) {
+        Optional<Poll> dbPoll = pollDAO.get(id);
+        if(!dbPoll.isPresent()) {
+            return new ResponseEntity<>("Could not delete. Poll does not exist", HttpStatus.NOT_FOUND);
+        }
+        pollDAO.delete(dbPoll.get());
+        return new ResponseEntity<>("Poll successfully deleted!", HttpStatus.ACCEPTED);
+    }
+
     @PutMapping("/polls/{id}/yes")
     public ResponseEntity<Object> voteYes(@PathVariable("id") long id) {
         Optional<Poll> dbPoll = pollDAO.get(id);
