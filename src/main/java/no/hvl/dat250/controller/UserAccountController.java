@@ -17,12 +17,12 @@ public class UserAccountController {
     @Autowired
     private UserDAO userDAO;
 
-    @GetMapping("/users")
+    @GetMapping("/api/users")
     public List<UserAccount> users() {
         return userDAO.getAll();
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/api/users/{id}")
     public ResponseEntity<Object> user(@PathVariable long id) {
         Optional<UserAccount> user = userDAO.get(id);
         if(!user.isPresent()) {
@@ -31,13 +31,13 @@ public class UserAccountController {
         return new ResponseEntity<>(user, HttpStatus.FOUND);
     }
 
-    @RequestMapping(value = "/user", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/api/user", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> createuser(@RequestBody UserAccount user) {
         userDAO.save(user);
         return new ResponseEntity<>("User created successfully!", HttpStatus.CREATED);
     }
 
-    @PutMapping("/users/{id}")
+    @PutMapping("/api/users/{id}")
     public ResponseEntity<Object> updateUser(@PathVariable("id") long id, @RequestBody UserAccount user) {
         Optional<UserAccount> dbuser = userDAO.get(id);
         if(!dbuser.isPresent()) {
@@ -48,7 +48,7 @@ public class UserAccountController {
         return new ResponseEntity<>("User successfully updated!", HttpStatus.ACCEPTED);
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/api/users/{id}")
     public ResponseEntity<Object> deleteUser(@PathVariable("id") long id) {
         Optional<UserAccount> dbuser = userDAO.get(id);
         if(!dbuser.isPresent()) {
