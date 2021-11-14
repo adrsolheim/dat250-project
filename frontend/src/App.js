@@ -2,6 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+import Login from './components/Login.js'
+
 
 class App extends Component {
   state = {
@@ -29,6 +31,7 @@ class App extends Component {
               )}
             </div>
           </header>
+          <Login />
         </div>
     );
   }
