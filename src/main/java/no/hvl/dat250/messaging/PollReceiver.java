@@ -33,7 +33,7 @@ public class PollReceiver {
 
 	private static final String EXCHANGE = "polls";
 	private static final String HOST = "localhost";
-	private static final String MONGO_URI = "mongodb://localhost:27017";
+	private static final String MONGO_URI = "mongodb+srv://feedappadmin:feedapppass@feedapp.ajign.mongodb.net/feedapp?retryWrites=true&w=majority";
 	private static final String DWEET_GUID = "a4435486-dc8a-4ca2-92b3-ce93a0abfaa6";
 	
 	/**
