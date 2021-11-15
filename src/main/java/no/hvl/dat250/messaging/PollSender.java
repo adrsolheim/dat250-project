@@ -31,7 +31,7 @@ public class PollSender {
 	 * @return Boolean if the operation was successful
 	 * @throws Exception
 	 */
-	public Boolean sendResult(String message) throws Exception {
+	public Boolean sendResult(String message) {
 		
 		try (Connection connection = this.factory.newConnection();
 				Channel channel = connection.createChannel()) {

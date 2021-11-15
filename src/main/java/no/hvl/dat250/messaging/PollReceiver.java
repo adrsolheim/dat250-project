@@ -42,8 +42,9 @@ public class PollReceiver {
 	 * IoT devices to the poll.
 	 * @throws Exception
 	 */
-	public PollReceiver() throws Exception {
+	public PollReceiver() {
 		
+		try {
 		// Disable DEBUG and INFO messages
 		LoggerContext loggerContext = (LoggerContext)LoggerFactory.getILoggerFactory();
 		loggerContext.getLogger("org.mongodb.driver").setLevel(Level.ERROR);
@@ -69,6 +70,10 @@ public class PollReceiver {
 		};
 		
 		channel.basicConsume(queueName, true, deliverCallback, consumerTag -> { });
+		
+		} catch (Exception e) {
+			System.err.println(" [-] Receiver failed to setup with error: " + e);
+		}
 	}
 	
 	/**
