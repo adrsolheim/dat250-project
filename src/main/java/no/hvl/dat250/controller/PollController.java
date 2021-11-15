@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController("/api")
 public class PollController {
 
@@ -34,7 +35,7 @@ public class PollController {
         return new ResponseEntity<>(poll, HttpStatus.FOUND);
     }
 
-    @RequestMapping(value = "/api/poll", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/api/polls", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> createPoll(@RequestBody Poll poll) {
         pollDAO.save(poll);
         return new ResponseEntity<>("Poll is created successfully!", HttpStatus.CREATED);

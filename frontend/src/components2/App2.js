@@ -8,6 +8,7 @@ import Login from "./Login"
 import PrivateRoute from "./PrivateRoute"
 import ForgotPassword from "./ForgotPassword"
 import UpdateProfile from "./UpdateProfile"
+import PollEditor from "./PollEditor"
 import Home from "./Home"
 
 function App2() {
@@ -22,6 +23,7 @@ function App2() {
             <Switch>
               <PrivateRoute exact path="/" component={Home} />
               <PrivateRoute path="/Dashboard" component={Dashboard} />
+              <PrivateRoute path="/PollEditor" component={PollEditor} />
               <PrivateRoute path="/update-profile" component={UpdateProfile} />
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />
