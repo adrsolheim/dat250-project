@@ -39,7 +39,7 @@ class QuestionForm extends Component {
           public : this.state.public
     }
     console.log("poll => " + JSON.stringify(poll))
-    PollService.createPoll(poll)
+    PollService.createPoll(JSON.stringify(poll))
   }
 
   changeTest = (ny) => {
