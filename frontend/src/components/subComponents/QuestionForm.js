@@ -12,13 +12,15 @@ class QuestionForm extends Component {
       question: "",
       timer: 0,
       public: true,
-      test : ""
+      test : "",
+      user : UserService.getUserFromMail(props.mail)
     }
   }
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     // TODO - get this into REST
-
+    let user = this.state.user
+  
     alert(`${this.state.question}
            ${this.state.timer}
            ${this.state.public}`)
@@ -34,13 +36,15 @@ class QuestionForm extends Component {
           isPublic: this.state.public,
           code : Math.round(min + Math.random() * (max - min)).toString(),
           duration : this.state.timer,
-          userAccount : null, //UserService.getUserFromMail(this.props.mail),
+          userAccount : await user,
           deviceList : [],
           public : this.state.public
     }
     console.log("poll => " + JSON.stringify(poll))
     PollService.createPoll(JSON.stringify(poll))
   }
+
+
 
   changeTest = (ny) => {
     this.setState({
