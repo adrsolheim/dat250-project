@@ -9,13 +9,14 @@ export default function PollEditor() {
   const [error, setError] = useState("")
   const { currentUser, logout } = useAuth()
   const history = useHistory()
-
+  const mail = currentUser.email
 
 
 
   return (
+    
     <>
-    <QuestonForm />
+    <QuestonForm mail={mail}/>
 
     <div class="pull-right">
       <Card>
@@ -27,7 +28,7 @@ export default function PollEditor() {
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
-      <p> <Link to="/Dashboard">Dashboard</Link> </p>
+        <p> <Link to="/Dashboard">Dashboard</Link> </p>
       </div>
     </div>
       

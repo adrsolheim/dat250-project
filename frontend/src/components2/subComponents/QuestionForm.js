@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Card, Button, Alert, Form } from "react-bootstrap"
 import  PollService  from "../services/PollService"
+import  UserService  from "../services/UserService"
+import { useAuth } from "../../contexts/AuthContext"
 
 class QuestionForm extends Component {
   constructor(props) {
@@ -9,12 +11,14 @@ class QuestionForm extends Component {
     this.state = {
       question: "",
       timer: 0,
-      public: true
+      public: true,
+      test : ""
     }
   }
 
   handleSubmit = event => {
     // TODO - get this into REST
+
     alert(`${this.state.question}
            ${this.state.timer}
            ${this.state.public}`)
@@ -30,12 +34,19 @@ class QuestionForm extends Component {
           isPublic: this.state.public,
           code : Math.round(min + Math.random() * (max - min)).toString(),
           duration : this.state.timer,
-          userAccount : null,
+          userAccount : null, //UserService.getUserFromMail(this.props.mail),
           deviceList : [],
           public : this.state.public
     }
     console.log("poll => " + JSON.stringify(poll))
     PollService.createPoll(poll)
+  }
+
+  changeTest = (ny) => {
+    this.setState({
+      test: ny.value
+    })
+    console.log(this.state.test)
   }
 
   handleQuestionChange = (event) => {
@@ -59,10 +70,13 @@ class QuestionForm extends Component {
 
 
     render() {
+     
       return (
+        
         <div>
+          <h1> {} </h1>
           <Form onSubmit={this.handleSubmit}>
-
+            
             <Form.Group className="mb-3" >
               <Form.Label>Write a question</Form.Label>
               <Form.Control value={this.question} onChange={this.handleQuestionChange} type="text" placeholder="Enter question" />
@@ -77,10 +91,12 @@ class QuestionForm extends Component {
             <Form.Check value={this.public}  onChange={this.handlePubllicChange} type="checkbox" label="Public" />
           </Form.Group>
 
+
+          <div className="w-100 text-center mt-2">
           <Button variant="primary" type="submit">
             Submit
           </Button>
-
+          </div>
         </Form>
       </div>
       )
