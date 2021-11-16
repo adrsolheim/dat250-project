@@ -1,0 +1,13 @@
+All the files in this folder (compomemts2) are copied  or based on the files from
+the github user WebDevSimplified's repository named:
+React-Firebase-Auth
+
+Link to repository:
+https://github.com/WebDevSimplified/React-Firebase-Auth/blob/master/src/components/UpdateProfile.js
+
+code was copied:
+14.11.2021
+
+last commit to repository:
+28.09.2020 
+
