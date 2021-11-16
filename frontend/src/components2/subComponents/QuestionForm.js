@@ -19,12 +19,16 @@ class QuestionForm extends Component {
            ${this.state.timer}
            ${this.state.public}`)
     event.preventDefault();
+
+    var min = 10000
+    var max = 1000000
+
     let poll = {
           question : this.state.question, 
           yesVote : 0,
           noVote : 0,
           isPublic: this.state.public,
-          code : "404",
+          code : Math.round(min + Math.random() * (max - min)).toString(),
           duration : this.state.timer,
           userAccount : null,
           deviceList : [],

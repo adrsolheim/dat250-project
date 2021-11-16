@@ -4,15 +4,22 @@ const POLL_API_URL = "http://localhost:8080/api/polls"
 
 class PollService {
 
-    async getPolls() {
-        const response = await fetch(POLL_API_URL);
-        const body = await response.json();
-        this.setState({polls: body});
-    }
-
     createPoll(poll) {
         console.log(poll)
         return axios.post(POLL_API_URL, poll)
+    }
+
+    async getPolls() {
+       return axios.get(POLL_API_URL)
+    }
+
+    voteYes(id) {
+        var link = "/" + id + "/yes"
+        return axios.put(POLL_API_URL + link)
+    }
+    voteNo(id) {
+        var link = "/" + id + "/no"
+        return axios.put(POLL_API_URL + link)
     }
 }
 

@@ -9,7 +9,9 @@ import PrivateRoute from "./PrivateRoute"
 import ForgotPassword from "./ForgotPassword"
 import UpdateProfile from "./UpdateProfile"
 import PollEditor from "./PollEditor"
+import Poll from "./Poll"
 import Home from "./Home"
+import Voted from "./Voted"
 
 function App2() {
   return (
@@ -25,6 +27,8 @@ function App2() {
               <PrivateRoute path="/Dashboard" component={Dashboard} />
               <PrivateRoute path="/PollEditor" component={PollEditor} />
               <PrivateRoute path="/update-profile" component={UpdateProfile} />
+              <Route path="/poll/:id" component={Poll} />
+              <Route path="/voted" component={Voted} />
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />
               <Route path="/forgot-password" component={ForgotPassword} />
