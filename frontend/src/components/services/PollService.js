@@ -1,12 +1,18 @@
 import axios from "axios";
 
 const POLL_API_URL = "http://localhost:8080/api/polls"
+let axiosConfig = {
+  headers: {
+      'Content-Type': 'application/json;charset=UTF-8',
+      "Access-Control-Allow-Origin": "*",
+  }
+};
 
 class PollService {
 
     createPoll(poll) {
         console.log(poll)
-        return axios.post(POLL_API_URL, poll)
+        return axios.post(POLL_API_URL, poll, axiosConfig)
     }
 
     async getPolls() {
