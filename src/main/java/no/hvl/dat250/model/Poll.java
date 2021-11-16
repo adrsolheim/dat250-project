@@ -106,7 +106,7 @@ public class Poll {
 	public String toString() {
 		return "Poll [id=" + id + ", question=" + question + ", yesVote=" + yesVote + 
 				", noVote=" + noVote + ", public=" + isPublic + ", code=" + code + ", "
-						+ "duration=" + duration + "]";
+						+ "duration=" + duration + ", user=" + userAccount + "]";
 	}
 
 }

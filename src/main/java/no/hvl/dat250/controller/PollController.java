@@ -37,6 +37,7 @@ public class PollController {
 
     @RequestMapping(value = "/api/polls", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> createPoll(@RequestBody Poll poll) {
+        System.out.println(poll.toString());
         pollDAO.save(poll);
         return new ResponseEntity<>("Poll is created successfully!", HttpStatus.CREATED);
     }
