@@ -17,10 +17,7 @@ public class Poll {
 	private boolean isPublic;
 	private String code;
 	private int duration;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnoreProperties({"username", "email", "password", "admin"})
-	private UserAccount userAccount;
+	private String email;
 	
 	@OneToMany(
 			mappedBy = "poll",
@@ -54,12 +51,12 @@ public class Poll {
 		this.deviceList = deviceList;
 	}
 
-	public UserAccount getUserAccount() {
-		return userAccount;
+	public String getEmail() {
+		return this.email;
 	}
 
-	public void setUserAccount(UserAccount userAccount) {
-		this.userAccount = userAccount;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getQuestion() {
@@ -114,7 +111,7 @@ public class Poll {
 	public String toString() {
 		return "Poll [id=" + id + ", question=" + question + ", yesVote=" + yesVote + 
 				", noVote=" + noVote + ", public=" + isPublic + ", code=" + code + ", "
-						+ "duration=" + duration + ", user=" + userAccount + "]";
+						+ "duration=" + duration + ", email=" + email + "]";
 	}
 
 }

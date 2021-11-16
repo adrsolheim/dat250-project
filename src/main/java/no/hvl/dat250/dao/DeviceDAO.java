@@ -1,8 +1,6 @@
 package no.hvl.dat250.dao;
 
-import no.hvl.dat250.dao.Dao;
 import no.hvl.dat250.model.Device;
-import no.hvl.dat250.model.UserAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;

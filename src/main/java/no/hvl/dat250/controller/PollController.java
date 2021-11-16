@@ -36,11 +36,11 @@ public class PollController {
         return new ResponseEntity<>(poll, HttpStatus.FOUND);
     }
     
-    @GetMapping("/api/polls/user/{id}")
-    public ResponseEntity<Object> pollForUser(@PathVariable long id) {
+    @GetMapping("/api/polls/user/{email}")
+    public ResponseEntity<Object> pollForUser(@PathVariable String email) {
     	List<Poll> polls = pollDAO.getAll();
     	polls = polls.stream()
-    			.filter(poll -> poll.getUserAccount().getId().equals(id))
+    			.filter(poll -> poll.getEmail().equals(email))
     			.collect(Collectors.toList());
     	return new ResponseEntity<>(polls, HttpStatus.FOUND);
     }
@@ -59,7 +59,7 @@ public class PollController {
             return new ResponseEntity<>("Could not update. Poll does not exist", HttpStatus.NOT_FOUND);
         }
         Object[] params = {poll.getQuestion(), poll.getYesVote(), poll.getNoVote(),
-                poll.getIsPublic(), poll.getCode(), poll.getDuration(), poll.getUserAccount()};
+                poll.getIsPublic(), poll.getCode(), poll.getDuration(), poll.getEmail()};
         pollDAO.update(dbPoll.get(), params);
         return new ResponseEntity<>("Poll successfully updated!", HttpStatus.ACCEPTED);
     }
@@ -82,7 +82,7 @@ public class PollController {
         }
         Poll poll = dbPoll.get();
         Object[] params = {poll.getQuestion(), poll.getYesVote() + 1, poll.getNoVote(),
-                poll.getIsPublic(), poll.getCode(), poll.getDuration(), poll.getUserAccount()};
+                poll.getIsPublic(), poll.getCode(), poll.getDuration(), poll.getEmail()};
         pollDAO.update(dbPoll.get(), params);
         return new ResponseEntity<>("You voted 'Yes'", HttpStatus.ACCEPTED);
     }
@@ -95,7 +95,7 @@ public class PollController {
         }
         Poll poll = dbPoll.get();
         Object[] params = {poll.getQuestion(), poll.getYesVote(), poll.getNoVote() + 1,
-                poll.getIsPublic(), poll.getCode(), poll.getDuration(), poll.getUserAccount()};
+                poll.getIsPublic(), poll.getCode(), poll.getDuration(), poll.getEmail()};
         pollDAO.update(dbPoll.get(), params);
         return new ResponseEntity<>("You voted 'No'", HttpStatus.ACCEPTED);
     }

@@ -5,7 +5,6 @@
 <persistence-unit name="feedapp" transaction-type="RESOURCE_LOCAL">
     <class>no.hvl.dat250.model.Device</class>
     <class>no.hvl.dat250.model.Poll</class>
-    <class>no.hvl.dat250.model.UserAccount</class>
     <properties>
         <property name="javax.persistence.schema-generation-action" value="drop-and-create"/>
         <property name="javax.persistence.schema-generation-target" value="database"/>
