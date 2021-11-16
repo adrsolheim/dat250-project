@@ -2,6 +2,8 @@ import React, { useState } from "react"
 import { Card, Button, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
+import PollService from "./services/PollService"
+import ShowPoll from "./subComponents/ShowPoll"
 
 export default function Dashboard() {
   const [error, setError] = useState("")
@@ -19,22 +21,45 @@ export default function Dashboard() {
     }
   }
 
+
   return (
     <>
       <Card>
-        <Card.Body>
+        <Card.Body class="mx-auto">
           <h2 className="text-center mb-4">Profile</h2>
           {error && <Alert variant="danger">{error}</Alert>}
+
+          <div className="w=100">
           <strong>Email:</strong> {currentUser.email}
-          <Link to="/update-profile" className="btn btn-primary w-100 mt-3">
+          </div> 
+
+          <div class="d-grid gap-2 ">
+          <Link to="/update-profile" className="btn btn-primary">
             Update Profile
           </Link>
+
+          <Button onClick={handleLogout}  className="btn btn-primary">
+            Log Out
+          </Button>
+          </div>
+  
         </Card.Body>
       </Card>
+
+      <Card>
+        <Card.Body class="mx-auto">
+        
+        <h2>All Polls from this user:</h2>
+        
+        <ShowPoll mail={currentUser.email}/>
+
+        </Card.Body>
+      </Card>
+
+
+
       <div className="w-100 text-center mt-2">
-        <Button variant="link" onClick={handleLogout}>
-          Log Out
-        </Button>
+
 
         <p> <Link to="/PollEditor">PollEditor</Link></p>
         

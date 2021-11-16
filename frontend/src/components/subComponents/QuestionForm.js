@@ -13,13 +13,13 @@ class QuestionForm extends Component {
       timer: 0,
       public: true,
       test : "",
-      user : UserService.getUserFromMail(props.mail)
+      user : props.mail
     }
   }
 
-  handleSubmit = async event => {
+  handleSubmit = event => {
     // TODO - get this into REST
-    let user = this.state.user
+    
   
     alert(`${this.state.question}
            ${this.state.timer}
@@ -36,7 +36,7 @@ class QuestionForm extends Component {
           isPublic: this.state.public,
           code : Math.round(min + Math.random() * (max - min)).toString(),
           duration : this.state.timer,
-          userAccount : await user,
+          email : this.props.mail,
           deviceList : [],
           public : this.state.public
     }

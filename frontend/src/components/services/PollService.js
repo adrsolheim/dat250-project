@@ -11,11 +11,12 @@ let axiosConfig = {
 class PollService {
 
     createPoll(poll) {
-        console.log(poll)
+        
         return axios.post(POLL_API_URL, poll, axiosConfig)
     }
 
     async getPolls() {
+       console.log(POLL_API_URL)
        return axios.get(POLL_API_URL)
     }
 
@@ -27,6 +28,14 @@ class PollService {
         var link = "/" + id + "/no"
         return axios.put(POLL_API_URL + link)
     }
+
+    async getPollsForUser(mail) {
+        var link =  POLL_API_URL + "/user/" + mail
+        return axios.get(POLL_API_URL + link)
+    }
+
+     
+
 }
 
 export default new PollService()

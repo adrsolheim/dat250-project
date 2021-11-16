@@ -31,7 +31,7 @@ class UserService {
                return users.data[i]
            }
 
-          }
+        }
     }
 
 }
