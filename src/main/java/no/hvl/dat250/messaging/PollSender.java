@@ -23,6 +23,11 @@ public class PollSender {
 	public PollSender() {
 		this.factory = new ConnectionFactory();
 		this.factory.setHost(HOST);
+		try {
+			this.factory.setUri("amqps://uyfgdgzw:0kVf7tNkLJje_KXO5mxGnERzm3FlTqt6@hawk.rmq.cloudamqp.com/uyfgdgzw");
+		} catch (Exception e) {
+			System.err.println("Connection to CloudAMQP failed with error: " + e);
+		}
 	}
 	
 	/**

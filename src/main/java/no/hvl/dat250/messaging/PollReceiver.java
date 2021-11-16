@@ -51,6 +51,7 @@ public class PollReceiver {
 		
 		ConnectionFactory factory = new ConnectionFactory();
 		factory.setHost(HOST);
+		factory.setUri("amqps://uyfgdgzw:0kVf7tNkLJje_KXO5mxGnERzm3FlTqt6@hawk.rmq.cloudamqp.com/uyfgdgzw");
 		Connection connection = factory.newConnection();
 		Channel channel = connection.createChannel();
 		
