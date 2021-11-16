@@ -13,8 +13,10 @@ public class UserAccount {
     private String email;
     private String password;
     private boolean admin;
+    
     @OneToMany(
             mappedBy = "userAccount",
+            fetch = FetchType.LAZY,
             cascade = CascadeType.ALL
     )
     List<Poll> pollList = new ArrayList<>();

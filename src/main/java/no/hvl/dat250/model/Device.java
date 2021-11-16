@@ -9,7 +9,8 @@ public class Device {
 	private Long id;
 	private int yesVote;
 	private int noVote;
-	@ManyToOne
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Poll poll;
 
 	public Poll getPoll() {

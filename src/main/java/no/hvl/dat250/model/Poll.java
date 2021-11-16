@@ -1,6 +1,9 @@
 package no.hvl.dat250.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
 @Entity
@@ -14,12 +17,17 @@ public class Poll {
 	private boolean isPublic;
 	private String code;
 	private int duration;
-	@ManyToOne
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnoreProperties({"username", "email", "password", "admin"})
 	private UserAccount userAccount;
+	
 	@OneToMany(
 			mappedBy = "poll",
+			fetch = FetchType.LAZY,
 			cascade = CascadeType.ALL
 	)
+	@JsonIgnoreProperties({"yesVote", "noVote", "poll"})
 	private List<Device> deviceList;
 
 	public Long getId() {

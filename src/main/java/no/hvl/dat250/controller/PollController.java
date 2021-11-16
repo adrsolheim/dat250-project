@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController("/api")
@@ -33,6 +34,15 @@ public class PollController {
             return new ResponseEntity<>("Poll not found", HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(poll, HttpStatus.FOUND);
+    }
+    
+    @GetMapping("/api/polls/user/{id}")
+    public ResponseEntity<Object> pollForUser(@PathVariable long id) {
+    	List<Poll> polls = pollDAO.getAll();
+    	polls = polls.stream()
+    			.filter(poll -> poll.getUserAccount().getId().equals(id))
+    			.collect(Collectors.toList());
+    	return new ResponseEntity<>(polls, HttpStatus.FOUND);
     }
 
     @RequestMapping(value = "/api/polls", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
