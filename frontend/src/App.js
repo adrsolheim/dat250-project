@@ -15,6 +15,7 @@ import Home from "./components/Home"
 import Voted from "./components/Voted"
 import VoteStopped from "./components/VoteStopped"
 
+
 function App() {
   return (
     <Container

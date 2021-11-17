@@ -42,6 +42,7 @@ class QuestionForm extends Component {
     }
     console.log("poll => " + JSON.stringify(poll))
     PollService.createPoll(JSON.stringify(poll))
+    
   }
 
 

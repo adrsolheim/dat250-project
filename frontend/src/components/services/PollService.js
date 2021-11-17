@@ -38,11 +38,31 @@ class PollService {
     async getPollsHelper(mail, polls) {
         var selectedPolls = []
         for (let i = 0; i < polls.data.length; i++) {
-            if (polls.data[i].email == mail) {
+            if (polls.data[i].email == mail && polls.data[i].duration > 0) {
                 selectedPolls.push(polls.data[i])
             } 
         }
         return selectedPolls
+    }
+    async getStoppedPollsForUser(mail) {
+        const polls = await axios.get(POLL_API_URL)
+        const selectedPolls = await this.getPollsStopHelper(mail, polls)
+        return selectedPolls
+    }
+    async getPollsStopHelper(mail, polls) {
+        var selectedPolls = []
+        for (let i = 0; i < polls.data.length; i++) {
+            if (polls.data[i].email == mail && polls.data[i].duration == 0) {
+                selectedPolls.push(polls.data[i])
+            } 
+        }
+        return selectedPolls
+    }
+
+    async getStopp(id) {
+        const link = "/finish/"+id
+        const res = await axios.get(POLL_API_URL + link)
+        return res
     }
 
      

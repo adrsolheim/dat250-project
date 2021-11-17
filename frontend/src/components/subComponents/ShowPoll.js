@@ -7,18 +7,15 @@ class ShowPoll extends Component {
 
         this.state = {
             polls : [],
+            stoppedPolls : [],
             email : props.mail
 
         }
     }
 
-    stopPoll(id, question) {
-
-        let message = {
-            question : question,
-        }
-
-        this.props.history.push('/api/polls/finish/'+id, message)
+    async stopPoll(id) {
+        const res = PollService.getStopp(id)
+        window.location.reload();
     }
 
 
@@ -28,13 +25,19 @@ class ShowPoll extends Component {
             console.log(res)
             this.setState({ polls: res})
         });
+        PollService.getStoppedPollsForUser(this.state.email).then((res) => {
+            console.log(res)
+            this.setState({ stoppedPolls: res})
+        });
     }
 
     render() {
         return (
-            <div>
-                <div className = "row">
-                    <table className="table table-striped table-bordered">
+            <div  >
+                <div className = "dt-body-center">
+                    <h2>All ongoing polls for this user</h2>
+
+                    <table className="table table-striped table-bordered table-center" style={{ width : "100%"}}>
                         <thead>
                             <tr>
                                 <th>Question</th>
@@ -57,7 +60,7 @@ class ShowPoll extends Component {
                                         <td> {poll.noVote} </td>
                                         <td> {poll.code} </td>
                                         <td>
-                                            <button onClick={() => this.stopPoll(poll.id, poll.question)} className="btn btn-danger">Stop Poll</button> 
+                                            <button onClick={() => this.stopPoll(poll.id)} className="btn btn-danger">Stop Poll</button> 
                                         </td>
 
                                     </tr>
@@ -67,6 +70,39 @@ class ShowPoll extends Component {
                         </tbody>
                     </table>
                 </div>
+
+                <div className = "dt-body-center">
+
+                    <h2>All stopped polls for this user</h2>
+
+                    <table className="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Question</th>
+                                <th>Yes Votes</th>
+                                <th>No Votes</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+
+                            {   
+                                
+                                this.state.stoppedPolls.map(
+                                    poll =>
+                                    <tr key = {poll.id}>
+                                        <td> {poll.question} </td>
+                                        <td> {poll.yesVote} </td>
+                                        <td> {poll.noVote} </td>
+                                        
+                                    </tr>
+                                )
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         )
     }

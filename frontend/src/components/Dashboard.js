@@ -45,10 +45,8 @@ export default function Dashboard() {
         </Card.Body>
       </Card>
 
-      <Card>
+      <Card className="text-center mt-4" >
         <Card.Body class="mx-auto">
-        
-        <h2>All Polls from this user:</h2>
         
         <ShowPoll mail={currentUser.email} history={history}/>
 
