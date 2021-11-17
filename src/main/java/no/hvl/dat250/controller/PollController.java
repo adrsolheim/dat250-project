@@ -52,9 +52,12 @@ public class PollController {
     public ResponseEntity<Object> pollEnd(@PathVariable long id) {
     	
     	PollSender sender = new PollSender();
-    	Optional<Poll> poll = pollDAO.get(id);
-    	
-    	String jsonString = new Gson().toJson(poll.get());
+    	Poll poll = pollDAO.get(id).get();
+        Object[] params = {poll.getQuestion(), poll.getYesVote(), poll.getNoVote(),
+                poll.getIsPublic(), poll.getCode(), 0, poll.getEmail()};
+        pollDAO.update(poll, params);
+    	poll.setDuration(0);
+    	String jsonString = new Gson().toJson(poll);
     	sender.sendResult(jsonString);
     	
     	return new ResponseEntity<>("Poll finished successfully!", HttpStatus.FOUND);
