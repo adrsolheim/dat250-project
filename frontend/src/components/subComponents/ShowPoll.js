@@ -16,18 +16,12 @@ class ShowPoll extends Component {
 
 
     componentDidMount() {
-        let mail = this.state.email
-      
-        //PollService.getPolls().then((res) => {
-        let pollTest = PollService.getPollsForUser(mail)
-        console.log(pollTest)
-        PollService.getPolls().then((res) => {
-            this.setState({ polls: res.data})
+        //PollService.getPollsForUser(this.state.email).then((res) => {
+        PollService.getPollsForUser(this.state.email).then((res) => {
+            console.log(res)
+            this.setState({ polls: res})
         });
-        //this.getPollsForUser(this.props.mail)
-        console.log("**************",this.state.polls)
     }
-    
 
     render() {
         return (

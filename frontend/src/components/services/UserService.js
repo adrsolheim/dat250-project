@@ -24,10 +24,8 @@ class UserService {
     
     async getUserFromMail(mail) {
         var users = await axios.get(USER_API_URL)
-        console.log(users)
         for (let i = 0; i < users.data.length; i++) {
            if (mail == users.data[i].email) {
-               console.log(users.data[i])
                return users.data[i]
            }
 

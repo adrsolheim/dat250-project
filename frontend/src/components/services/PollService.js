@@ -30,8 +30,19 @@ class PollService {
     }
 
     async getPollsForUser(mail) {
-        var link =  POLL_API_URL + "/user/" + mail
-        return axios.get(POLL_API_URL + link)
+        const polls = await axios.get(POLL_API_URL)
+        const selectedPolls = await this.getPollsHelper(mail, polls)
+        return selectedPolls
+    }
+
+    async getPollsHelper(mail, polls) {
+        var selectedPolls = []
+        for (let i = 0; i < polls.data.length; i++) {
+            if (polls.data[i].email == mail) {
+                selectedPolls.push(polls.data[i])
+            } 
+        }
+        return selectedPolls
     }
 
      
