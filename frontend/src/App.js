@@ -13,6 +13,7 @@ import PollEditor from "./components/PollEditor"
 import Poll from "./components/Poll"
 import Home from "./components/Home"
 import Voted from "./components/Voted"
+import VoteStopped from "./components/VoteStopped"
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
       className="d-flex align-items-center justify-content-center"
       style={{ minHeight: "50vh" }}
     >
-      <div className="w-100" style={{ maxWidth: "470px" }}>
+      <div className="w-100" style={{ maxWidth: "500px" }}>
         <Router>
           <AuthProvider>
             <Switch>
@@ -28,6 +29,7 @@ function App() {
               <PrivateRoute path="/Dashboard" component={Dashboard} />
               <PrivateRoute path="/PollEditor" component={PollEditor} />
               <PrivateRoute path="/update-profile" component={UpdateProfile} />
+              <PrivateRoute path="/api/polls/finish/:id" component={VoteStopped} />
               <Route path="/poll/:id" component={Poll} />
               <Route path="/voted" component={Voted} />
               <Route path="/signup" component={Signup} />

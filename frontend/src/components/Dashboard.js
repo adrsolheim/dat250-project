@@ -20,8 +20,7 @@ export default function Dashboard() {
       setError("Failed to log out")
     }
   }
-
-
+  
   return (
     <>
       <Card>
@@ -51,7 +50,7 @@ export default function Dashboard() {
         
         <h2>All Polls from this user:</h2>
         
-        <ShowPoll mail={currentUser.email}/>
+        <ShowPoll mail={currentUser.email} history={history}/>
 
         </Card.Body>
       </Card>

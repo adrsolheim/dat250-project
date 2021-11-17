@@ -12,7 +12,14 @@ class ShowPoll extends Component {
         }
     }
 
+    stopPoll(id, question) {
 
+        let message = {
+            question : question,
+        }
+
+        this.props.history.push('/api/polls/finish/'+id, message)
+    }
 
 
     componentDidMount() {
@@ -26,7 +33,6 @@ class ShowPoll extends Component {
     render() {
         return (
             <div>
-                <h2 className="text-center">List of polls</h2>
                 <div className = "row">
                     <table className="table table-striped table-bordered">
                         <thead>
@@ -35,6 +41,7 @@ class ShowPoll extends Component {
                                 <th>Yes Votes</th>
                                 <th>No Votes</th>
                                 <th>Code</th>
+                                <th>Stop Poll</th>
                             </tr>
                         </thead>
                         
@@ -49,6 +56,9 @@ class ShowPoll extends Component {
                                         <td> {poll.yesVote} </td>
                                         <td> {poll.noVote} </td>
                                         <td> {poll.code} </td>
+                                        <td>
+                                            <button onClick={() => this.stopPoll(poll.id, poll.question)} className="btn btn-danger">Stop Poll</button> 
+                                        </td>
 
                                     </tr>
                                 )
