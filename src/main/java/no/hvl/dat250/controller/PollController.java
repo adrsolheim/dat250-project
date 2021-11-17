@@ -2,6 +2,7 @@ package no.hvl.dat250.controller;
 
 import no.hvl.dat250.dao.PollDAO;
 import no.hvl.dat250.model.Poll;
+import no.hvl.dat250.messaging.PollSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import com.google.gson.Gson;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController("/api")
@@ -43,6 +46,18 @@ public class PollController {
     			.filter(poll -> poll.getEmail().equals(email))
     			.collect(Collectors.toList());
     	return new ResponseEntity<>(polls, HttpStatus.FOUND);
+    }
+    
+    @GetMapping("/api/polls/finish/{id}")
+    public ResponseEntity<Object> pollEnd(@PathVariable long id) {
+    	
+    	PollSender sender = new PollSender();
+    	Optional<Poll> poll = pollDAO.get(id);
+    	
+    	String jsonString = new Gson().toJson(poll.get());
+    	sender.sendResult(jsonString);
+    	
+    	return new ResponseEntity<>("Poll finished successfully!", HttpStatus.FOUND);
     }
 
     @RequestMapping(value = "/api/polls", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

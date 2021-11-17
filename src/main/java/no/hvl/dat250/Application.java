@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import no.hvl.dat250.messaging.PollReceiver;
+
 @SpringBootApplication
 public class Application {
     private static final String PERSISTENCE_UNIT_NAME = "feedapp";
@@ -16,6 +18,8 @@ public class Application {
     public static void main(String[] args) {
         
         SpringApplication.run(Application.class, args);
+        
+        PollReceiver receiver = new PollReceiver();
     }
 
     @Bean

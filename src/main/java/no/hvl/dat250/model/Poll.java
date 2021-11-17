@@ -25,7 +25,7 @@ public class Poll {
 			cascade = CascadeType.ALL
 	)
 	@JsonIgnoreProperties({"yesVote", "noVote", "poll"})
-	private List<Device> deviceList;
+	private transient List<Device> deviceList;
 
 	public Long getId() {
 		return id;
