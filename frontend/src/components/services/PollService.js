@@ -29,31 +29,30 @@ class PollService {
         return axios.put(POLL_API_URL + link)
     }
 
-    async getPollsForUser(mail) {
-        const polls = await axios.get(POLL_API_URL)
-        const selectedPolls = await this.getPollsHelper(mail, polls)
-        return selectedPolls
+    async getPollsForUser(email) {
+        const url =POLL_API_URL + "/user/" + email
+        let response = await fetch(url);
+        let data = await response.json();
+        return  data
     }
 
-    async getPollsHelper(mail, polls) {
+    async getRunningPolls(email) {
+        var polls = await this.getPollsForUser(email)
         var selectedPolls = []
-        for (let i = 0; i < polls.data.length; i++) {
-            if (polls.data[i].email == mail && polls.data[i].duration > 0) {
-                selectedPolls.push(polls.data[i])
+        for (let i = 0; i < polls.length; i++) {
+            if (polls[i].email == email && polls[i].duration > 0) {
+                selectedPolls.push(polls[i])
             } 
         }
         return selectedPolls
     }
-    async getStoppedPollsForUser(mail) {
-        const polls = await axios.get(POLL_API_URL)
-        const selectedPolls = await this.getPollsStopHelper(mail, polls)
-        return selectedPolls
-    }
-    async getPollsStopHelper(mail, polls) {
+
+    async getStoppedPolls(email) {
+        var polls = await this.getPollsForUser(email)
         var selectedPolls = []
-        for (let i = 0; i < polls.data.length; i++) {
-            if (polls.data[i].email == mail && polls.data[i].duration == 0) {
-                selectedPolls.push(polls.data[i])
+        for (let i = 0; i < polls.length; i++) {
+            if (polls[i].email == email && polls[i].duration == 0) {
+                selectedPolls.push(polls[i])
             } 
         }
         return selectedPolls
@@ -61,12 +60,8 @@ class PollService {
 
     async getStopp(id) {
         const link = "/finish/"+id
-        const res = await axios.get(POLL_API_URL + link)
-        return res
+        await axios.put(POLL_API_URL + link)
     }
-
-     
-
 }
 
 export default new PollService()

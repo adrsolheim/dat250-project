@@ -14,22 +14,27 @@ class ShowPoll extends Component {
     }
 
     async stopPoll(id) {
-        const res = PollService.getStopp(id)
-        window.location.reload();
+        await PollService.getStopp(id)
+        this.handleUpdateState()       
     }
-
-
     componentDidMount() {
-        //PollService.getPollsForUser(this.state.email).then((res) => {
-        PollService.getPollsForUser(this.state.email).then((res) => {
-            console.log(res)
+        this.handleUpdateState();
+    }
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.stoppedPolls !== this.state.stoppedPolls &&
+            prevState.polls  !== this.state.polls) {
+            this.handleUpdateState();
+        }
+    }
+    handleUpdateState = () => {
+        PollService.getRunningPolls(this.state.email).then((res) => {
             this.setState({ polls: res})
         });
-        PollService.getStoppedPollsForUser(this.state.email).then((res) => {
-            console.log(res)
+        PollService.getStoppedPolls(this.state.email).then((res) => {
             this.setState({ stoppedPolls: res})
         });
     }
+    
 
     render() {
         return (
