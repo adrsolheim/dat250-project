@@ -49,6 +49,7 @@ public class PollDAO implements Dao<Poll> {
         poll.setIsPublic((boolean) Objects.requireNonNull(params[3], "isPublic cannot be null"));
         poll.setCode((String) Objects.requireNonNull(params[4], "Code cannot be null"));
         poll.setDuration((int) Objects.requireNonNull(params[5], "Duration cannot be null"));
+        poll.setCode((String) Objects.requireNonNull(params[6], "Email cannot be null"));
         executeInsideTransaction(entityManager -> entityManager.merge(poll));
     }
     

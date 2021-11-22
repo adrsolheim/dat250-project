@@ -48,7 +48,7 @@ public class PollController {
     	return new ResponseEntity<>(polls, HttpStatus.FOUND);
     }
     
-    @GetMapping("/api/polls/finish/{id}")
+    @PutMapping("/api/polls/finish/{id}")
     public ResponseEntity<Object> pollEnd(@PathVariable long id) {
     	
     	PollSender sender = new PollSender();
@@ -60,7 +60,7 @@ public class PollController {
     	String jsonString = new Gson().toJson(poll);
     	sender.sendResult(jsonString);
     	
-    	return new ResponseEntity<>("Poll finished successfully!", HttpStatus.FOUND);
+    	return new ResponseEntity<>("Poll finished successfully!", HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(value = "/api/polls", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
