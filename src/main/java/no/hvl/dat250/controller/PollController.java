@@ -2,6 +2,7 @@ package no.hvl.dat250.controller;
 
 import no.hvl.dat250.dao.PollDAO;
 import no.hvl.dat250.model.Poll;
+import no.hvl.dat250.messaging.DweetHandler;
 import no.hvl.dat250.messaging.PollSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,6 +53,7 @@ public class PollController {
     public ResponseEntity<Object> pollEnd(@PathVariable long id) {
     	
     	PollSender sender = new PollSender();
+    	DweetHandler dweetHandler = new DweetHandler();
     	Poll poll = pollDAO.get(id).get();
         Object[] params = {poll.getQuestion(), poll.getYesVote(), poll.getNoVote(),
                 poll.getIsPublic(), poll.getCode(), 0, poll.getEmail()};
@@ -59,8 +61,20 @@ public class PollController {
     	poll.setDuration(0);
     	String jsonString = new Gson().toJson(poll);
     	sender.sendResult(jsonString);
+    	dweetHandler.pollEndEvent(poll);
     	
     	return new ResponseEntity<>("Poll finished successfully!", HttpStatus.ACCEPTED);
+    }
+    
+    @PutMapping("/api/polls/start/{id}")
+    public ResponseEntity<Object> pollStart(@PathVariable long id) {
+    	
+    	DweetHandler dweetHandler = new DweetHandler();
+    	Poll poll = pollDAO.get(id).get();
+    	
+    	dweetHandler.pollStartEvent(poll);
+    	
+    	return new ResponseEntity<>("Poll start event sent successfully!", HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(value = "/api/polls", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

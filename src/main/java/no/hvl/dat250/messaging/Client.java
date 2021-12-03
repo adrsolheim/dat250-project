@@ -9,6 +9,7 @@ public class Client {
 	
 	public static void main(String[] args) throws Exception {
 	
+		@SuppressWarnings("unused")
 		PollReceiver receiver = new PollReceiver();
 		PollSender sender = new PollSender();
 		
