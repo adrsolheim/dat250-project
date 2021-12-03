@@ -72,7 +72,7 @@ public class PollReceiver {
 	 * @param message String representation of a JSON object
 	 * @return Boolean if the operation was successful
 	 */
-	private static Boolean forwardDatabase(String message) {
+	protected static Boolean forwardDatabase(String message) {
 	
 		try (MongoClient mongoClient = MongoClients.create(MONGO_URI)) {
 			
