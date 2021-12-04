@@ -16,7 +16,7 @@ public class Poll {
 	private int noVote;
 	private boolean isPublic;
 	private String code;
-	private int duration;
+	private long duration;
 	private String email;
 	
 	@OneToMany(
@@ -99,12 +99,12 @@ public class Poll {
 		this.code = code;
 	}
 	
-	public int getDuration() {
+	public long getDuration() {
 		return this.duration;
 	}
 	
 	public void setDuration(int duration) {
-		this.duration = duration;
+		this.duration =  Long.valueOf( duration);
 	}
 	
 	@Override

@@ -14,7 +14,7 @@ import Poll from "./components/Poll"
 import Home from "./components/Home"
 import Voted from "./components/Voted"
 import VoteStopped from "./components/VoteStopped"
-
+import AnalyticPoll from "./components/AnalyticPoll"
 
 function App() {
   return (
@@ -34,6 +34,7 @@ function App() {
               <Route path="/poll/:id" component={Poll} />
               <Route path="/voted" component={Voted} />
               <Route path="/signup" component={Signup} />
+              <Route path="/analyticPoll" component={AnalyticPoll} />
               <Route path="/login" component={Login} />
               <Route path="/forgot-password" component={ForgotPassword} />
               <Route path="/home" component={Home} />

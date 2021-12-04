@@ -24,7 +24,7 @@ export default function Dashboard() {
   return (
     <>
       <Card>
-        <Card.Body class="mx-auto">
+        <Card.Body className="mx-auto">
           <h2 className="text-center mb-4">Profile</h2>
           {error && <Alert variant="danger">{error}</Alert>}
 

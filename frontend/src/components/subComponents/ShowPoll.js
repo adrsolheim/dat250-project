@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import  PollService  from "../services/PollService"
+import { Link } from "react-router-dom"
 
 class ShowPoll extends Component {
     constructor(props) {
@@ -50,6 +51,7 @@ class ShowPoll extends Component {
                                 <th>No Votes</th>
                                 <th>Code</th>
                                 <th>Stop Poll</th>
+                                <th>View Poll</th>
                             </tr>
                         </thead>
                         
@@ -66,6 +68,15 @@ class ShowPoll extends Component {
                                         <td> {poll.code} </td>
                                         <td>
                                             <button onClick={() => this.stopPoll(poll.id)} className="btn btn-danger">Stop Poll</button> 
+                                        </td>
+                                        <td>
+                                            <Link className="btn btn-primary" 
+                                                  to={{
+                                                    pathname: "/AnalyticPoll",
+                                                    state: {poll}
+                                                  }}>
+                                                    View Poll
+                                            </Link>
                                         </td>
 
                                     </tr>
@@ -86,6 +97,7 @@ class ShowPoll extends Component {
                                 <th>Question</th>
                                 <th>Yes Votes</th>
                                 <th>No Votes</th>
+                                <th>View Poll</th>
                             </tr>
                         </thead>
                         
@@ -99,7 +111,15 @@ class ShowPoll extends Component {
                                         <td> {poll.question} </td>
                                         <td> {poll.yesVote} </td>
                                         <td> {poll.noVote} </td>
-                                        
+                                        <td>
+                                            <Link className="btn btn-primary" 
+                                                  to={{
+                                                    pathname: "/AnalyticPoll",
+                                                    state: {poll}
+                                                  }}>
+                                                    View Poll
+                                            </Link>
+                                        </td>
                                     </tr>
                                 )
                             }

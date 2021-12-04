@@ -36,6 +36,8 @@ export default function Home() {
         //await getPoll(pincode.current.value)
         var polls = await PollService.getPolls()
         var poll = await pickPoll(pincode, polls)
+        //var poll = await PollService.getPollbyId2(pincode)
+        console.log(poll)
         if (poll == null) {
           throw new Error
         }

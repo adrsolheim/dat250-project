@@ -60,9 +60,13 @@ class QuestionForm extends Component {
     })
   }
   handleTimerChange = (event) => {
+    var currentDate = new Date().getTime() + event.target.value * 1000
+    currentDate = Math.floor(currentDate/1000)
+    console.log("-->", currentDate)
     this.setState({
-      timer: event.target.value
+      timer: currentDate
     })
+    console.log(this.state.timer)
   }
   handlePubllicChange = (event) => {
     this.setState({
@@ -87,7 +91,7 @@ class QuestionForm extends Component {
               <Form.Control value={this.question} onChange={this.handleQuestionChange} type="text" placeholder="Enter question" />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Group className="mb-3">
               <Form.Label>How long will poll be open (in seconds)?</Form.Label>
               <Form.Control value={this.timer} onChange={this.handleTimerChange} type="number" placeholder="Time" />
             </Form.Group>
