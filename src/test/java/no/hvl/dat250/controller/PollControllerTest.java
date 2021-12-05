@@ -3,7 +3,7 @@ package no.hvl.dat250.controller;
 import java.util.List;
 
 import org.apache.http.HttpStatus;
-import org.junit.After;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
