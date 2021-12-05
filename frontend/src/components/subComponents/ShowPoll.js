@@ -65,7 +65,7 @@ class ShowPoll extends Component {
                                         <td> {poll.question} </td>
                                         <td> {poll.yesVote} </td>
                                         <td> {poll.noVote} </td>
-                                        <td> {poll.code} </td>
+                                        <td> {poll.id} </td>
                                         <td>
                                             <button onClick={() => this.stopPoll(poll.id)} className="btn btn-danger">Stop Poll</button> 
                                         </td>

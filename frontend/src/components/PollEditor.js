@@ -1,14 +1,12 @@
-import React, { useState } from "react"
-import { Card, Button, Alert, Form } from "react-bootstrap"
+import React from "react"
+
 import { useAuth } from "../contexts/AuthContext"
-import { Link, useHistory } from "react-router-dom"
-import QuestonForm from "./subComponents/QuestionForm"
+import { Link } from "react-router-dom"
+import QuestionForm from "./subComponents/QuestionForm"
 
 
 export default function PollEditor() {
-  const [error, setError] = useState("")
-  const { currentUser, logout } = useAuth()
-  const history = useHistory()
+  const { currentUser } = useAuth()
   const mail = currentUser.email
 
 
@@ -16,20 +14,22 @@ export default function PollEditor() {
   return (
     
     <>
-    <QuestonForm mail={mail}/>
+    <strong>Logged in as:</strong> {currentUser.email}
+    
+    <br/>
+    
+    <br/>
+    <h3>Create a Poll</h3>
+    <br/>
+    <QuestionForm mail={mail}/> 
 
-    <div class="pull-right">
-      <Card>
-        <Card.Body>
-          <h2 className="text-center mb-4">Profile</h2>
-          {error && <Alert variant="danger">{error}</Alert>}
-          <strong>Email:</strong> {currentUser.email}
-          
-        </Card.Body>
-      </Card>
-      <div className="w-100 text-center mt-2">
-        <p> <Link to="/Dashboard">Dashboard</Link> </p>
-      </div>
+    <br/>
+    <br/>
+
+    <div className="w-100 text-center ">
+
+        <Link className="btn btn-info" to="/UserPage">User Page</Link>
+   
     </div>
       
     </>

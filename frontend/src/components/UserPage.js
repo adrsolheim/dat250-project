@@ -2,8 +2,9 @@ import React, { useState } from "react"
 import { Card, Button, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
-import PollService from "./services/PollService"
 import ShowPoll from "./subComponents/ShowPoll"
+import HomeButton from "./subComponents/HomeButton"
+
 
 export default function Dashboard() {
   const [error, setError] = useState("")
@@ -15,7 +16,7 @@ export default function Dashboard() {
 
     try {
       await logout()
-      history.push("/login")
+      history.push("/HomeLoggedIn")
     } catch {
       setError("Failed to log out")
     }
@@ -28,11 +29,11 @@ export default function Dashboard() {
           <h2 className="text-center mb-4">Profile</h2>
           {error && <Alert variant="danger">{error}</Alert>}
 
-          <div className="w=100">
+          <div className="w-100">
           <strong>Email:</strong> {currentUser.email}
           </div> 
 
-          <div class="d-grid gap-2 ">
+          <div className="d-grid gap-2 ">
           <Link to="/update-profile" className="btn btn-primary">
             Update Profile
           </Link>
@@ -46,7 +47,7 @@ export default function Dashboard() {
       </Card>
 
       <Card className="text-center mt-4" >
-        <Card.Body class="mx-auto">
+        <Card.Body className="mx-auto">
         
         <ShowPoll mail={currentUser.email} history={history}/>
 
@@ -57,11 +58,11 @@ export default function Dashboard() {
 
       <div className="w-100 text-center mt-2">
 
-
-        <p> <Link to="/PollEditor">PollEditor</Link></p>
-        
-        <p> <Link to="/home">Home</Link> </p>
+        <Link className="btn btn-secondary" to="/PollEditor" style={{witdh: 110}}>Poll Editor</Link>
       </div>
+
+      <div className="text-center mt-2"><HomeButton /></div>
+      
     </>
   )
 }

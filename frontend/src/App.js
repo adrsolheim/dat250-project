@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
 import { AuthProvider } from "./contexts/AuthContext"
 import Signup from "./components/Signup"
-import Dashboard from "./components/Dashboard"
+import UserPage from "./components/UserPage"
 import Login from "./components/Login"
 import PrivateRoute from "./components/PrivateRoute"
 import ForgotPassword from "./components/ForgotPassword"
@@ -12,8 +12,8 @@ import UpdateProfile from "./components/UpdateProfile"
 import PollEditor from "./components/PollEditor"
 import Poll from "./components/Poll"
 import Home from "./components/Home"
+import HomeLoggedIn from "./components/HomeLoggedIn"
 import Voted from "./components/Voted"
-import VoteStopped from "./components/VoteStopped"
 import AnalyticPoll from "./components/AnalyticPoll"
 
 function App() {
@@ -27,10 +27,10 @@ function App() {
           <AuthProvider>
             <Switch>
               <PrivateRoute exact path="/" component={Home} />
-              <PrivateRoute path="/Dashboard" component={Dashboard} />
+              <PrivateRoute path="/UserPage" component={UserPage} />
               <PrivateRoute path="/PollEditor" component={PollEditor} />
               <PrivateRoute path="/update-profile" component={UpdateProfile} />
-              <PrivateRoute path="/api/polls/finish/:id" component={VoteStopped} />
+              <PrivateRoute path="/HomeLoggedIn" component={HomeLoggedIn} />
               <Route path="/poll/:id" component={Poll} />
               <Route path="/voted" component={Voted} />
               <Route path="/signup" component={Signup} />

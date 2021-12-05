@@ -1,3 +1,12 @@
+/*
+This code is based on a guide from Youtube
+
+Information about guide:
+created by user: Web Dev Simplified
+uploaded: 10. Oktober 2020
+title: React Authentication Crash Course With Firebase And Routing
+link to video: https://youtu.be/PKwu15ldZ7k
+*/
 import React, { useContext, useState, useEffect } from "react"
 import { auth } from "../firebase"
 

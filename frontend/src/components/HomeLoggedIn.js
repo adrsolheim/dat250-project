@@ -1,46 +1,47 @@
 import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
-import {  useHistory } from "react-router-dom"
+import { useAuth } from "../contexts/AuthContext"
+import { Link, useHistory } from "react-router-dom"
 import  PollService  from "./services/PollService"
-import LogginButton from "./subComponents/LoginButton"
-import NewAccButton from "./subComponents/NewAccButton"
 
 
-export default function Home() {
+
+export default function HomeLoggIn() {
    
     const pincode = useRef()
+   
+    const { currentUser } = useAuth()
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
     const history = useHistory()
 
   
     
-   
     async function handleSubmit(event) {
       event.preventDefault()
-      const code = pincode.current.value 
+      const code = pincode.current.value
       try {
         setError("")
         setLoading(true)
         if (code === null || code === "") {
-          throw new Error("You have not given a code")
+            throw new Error("You have not given a code")
         }
-    
+      
         var poll = await PollService.getPollbyId(code)
-       
-
-        if (poll === null || !poll.public) {
-          throw new Error("Poll not accessible")
+         
+  
+        if (poll === null) {
+            throw new Error("Poll not accessible")
         }
         if (poll.duration === 0) {
-          throw new Error("This poll has ran out")
+            throw new Error("This poll has ran out")
         }
         if (new Date() - (new Date(poll.duration)*1000) > 0) {
-          PollService.checkForStop(poll)
-          throw new Error("This poll has ran out")
+            PollService.checkForStop(poll)
+            throw new Error("This poll has ran out")
         }
 
-     
+    
         var pollid = "/" + poll.id
         history.push("/poll" + pollid, poll)
 
@@ -50,11 +51,16 @@ export default function Home() {
   
       setLoading(false)
     }
+
  
   
   return (
     <>
-     
+        <strong>Logged in as:</strong> {currentUser.email}
+    
+        <br/>
+    
+        <br/>
       
       <Card>
         <Card.Body>
@@ -78,20 +84,10 @@ export default function Home() {
         </Card.Body>
       </Card>
       <br></br>
-      <div  style={{position: 'relative', left: '20%'}}>
-        <table>
-          <tr>
-            <th>
-              <NewAccButton/> 
-            </th>
-
-            <th>
-              <LogginButton/>
-            </th>
-          </tr>
-        </table>
+      
+      <div className="w-100 text-center mt-2 ">
+        <Link className="btn btn-info w-50" to="/UserPage">User page</Link>
       </div>
-
     </>
   )
 }

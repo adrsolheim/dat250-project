@@ -9,35 +9,48 @@ let axiosConfig = {
 };
 
 class PollService {
-
-    createPoll(poll) {
+    async createPoll(poll, email) {
         
-        return axios.post(POLL_API_URL, poll, axiosConfig)
+        await axios.post(POLL_API_URL, poll, axiosConfig)
+
+        var newPolls = await  this.getRunningPolls(email)
+        const newestPoll = newPolls.length - 1
+        await this.startPoll(newPolls[newestPoll].id)
+       
     }
 
     async getPolls() {
        return axios.get(POLL_API_URL)
     }
 
-    async getPollById(id) {
-        return axios.get(POLL_API_URL + "/"+id)
+    async getPollbyId(id) {
+        try {
+           
+            const url =POLL_API_URL + "/" + id
+            let response = await fetch(url);
+            let data = await response.json();
+            return  data
+            }
+        catch {
+            console.log("Error, invalid code")
+        }
     }
 
-    async getPollbyId2(id) {
-        const url =POLL_API_URL + "/" + id
-        let response = await fetch(url);
-        let data = await response.json();
-        console.log(data)
-        return  data
+    async voteYes(id) {
+        try {
+            var link = "/" + id + "/yes"
+            await axios.put(POLL_API_URL + link)
+        } catch {
+            console.log("Error occured")
+        }  
     }
-
-    voteYes(id) {
-        var link = "/" + id + "/yes"
-        return axios.put(POLL_API_URL + link)
-    }
-    voteNo(id) {
-        var link = "/" + id + "/no"
-        return axios.put(POLL_API_URL + link)
+    async voteNo(id) {
+        try {
+            var link = "/" + id + "/no"
+            await axios.put(POLL_API_URL + link)
+        } catch {
+            console.log("Error occured")
+        }   
     }
 
     async getPollsForUser(email) {
@@ -52,7 +65,7 @@ class PollService {
         var selectedPolls = []
         var currentTime = new Date()
         for (let i = 0; i < polls.length; i++) {
-            if (polls[i].email == email && currentTime - (new Date(polls[i].duration)*1000) < 0) {
+            if (polls[i].email === email && currentTime - (new Date(polls[i].duration)*1000) < 0) {
                 selectedPolls.push(polls[i])
             } 
         }
@@ -71,7 +84,7 @@ class PollService {
         var selectedPolls = []
         var currentTime = new Date()
         for (let i = 0; i < polls.length; i++) {
-            if (polls[i].email == email && currentTime - (new Date(polls[i].duration)*1000) >= 0) {
+            if (polls[i].email === email && currentTime - (new Date(polls[i].duration)*1000) >= 0) {
                 this.checkForStop(polls[i])
                 selectedPolls.push(polls[i])
             } 
@@ -85,6 +98,11 @@ class PollService {
         const link = "/finish/"+id
         await axios.put(POLL_API_URL + link)
     }
+    async startPoll(id) {
+        const link = "/start/"+id
+        await axios.put(POLL_API_URL + link)
+    }
+
 }
 
 export default new PollService()

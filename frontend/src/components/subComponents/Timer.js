@@ -16,7 +16,6 @@ export default class Timer extends Component {
         this.doInterValChange()
     }
     doInterValChange() {
-        console.log("state: ", this.state.time_left)
         
             this.myInterval = setInterval(() => {
                 if (this.state.time_left > 0) {
@@ -54,10 +53,10 @@ export default class Timer extends Component {
                 var min = Math.floor(duration % 3600 / 60);
                 var sec = Math.floor(duration % 3600 % 60);
                 
-                var dDisplay = day > 0 ? day + (day == 1 ? " day, " : " days, ") : "";
-                var hDisplay = hour > 0 ? hour + (hour == 1 ? " hour, " : " hours, ") : "";
-                var mDisplay = min > 0 ? min + (min == 1 ? " minute, " : " minutes, ") : "";
-                var sDisplay = sec > 0 ? sec + (sec == 1 ? " second" : " seconds") : "";
+                var dDisplay = day > 0 ? day + (day === 1 ? " day, " : " days, ") : "";
+                var hDisplay = hour > 0 ? hour + (hour === 1 ? " hour, " : " hours, ") : "";
+                var mDisplay = min > 0 ? min + (min === 1 ? " minute, " : " minutes, ") : "";
+                var sDisplay = sec > 0 ? sec + (sec === 1 ? " second" : " seconds") : "";
                 return dDisplay + hDisplay + mDisplay + sDisplay;
             }
         }

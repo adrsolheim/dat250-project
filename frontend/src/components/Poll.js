@@ -1,43 +1,55 @@
-import React, { useRef, useState, useParams } from "react"
-import { Form, Button, Card, Alert } from "react-bootstrap"
-import { useAuth } from "../contexts/AuthContext"
+import React from "react"
+import { Form, Button, Card } from "react-bootstrap"
 import { Link, useHistory, useLocation } from "react-router-dom"
 import  PollService  from "./services/PollService"
+import Timer from "./subComponents/Timer"
 
 export default function Poll() {
    
     const location = useLocation();
-    const emailRef = useRef()
-    const passwordRef = useRef()
-    const { login } = useAuth()
-    const [error, setError] = useState("")
-    const [loading, setLoading] = useState(false)
     const history = useHistory()
   
 
     function voteYes(event) {
-        console.log(event.target.value)
+      if (checkDuration()) {
         PollService.voteYes(location.state.id)
         voted("Yes", location.state.question)
+      } else {
+        history.push("/HomeLoggedIn")
+      }
     }
     function voteNo(event) {
-        console.log(event.target.value)
+      if (checkDuration()) {
         PollService.voteNo(location.state.id)
         voted("No", location.state.question)
+      } else {
+        history.push("/HomeLoggedIn")
+      }
     }
     function voted(vote, question) {
         let votedResult = {
             answer : vote,
-            question : question,
+            poll : location.state,
         }
         history.push("/voted", votedResult)
+    }
+
+    function checkDuration() {
+      if (new Date() - (new Date(location.state.duration)*1000) > 0) {
+        PollService.checkForStop(location.state)
+        return false
+      }
+      return true
     }
   
   return (
     <>
       <h1>Poll Question:</h1>
-
-      <h3>Pin to enter: {location.state.code}</h3>
+      <br/>
+      <h4>Code to join: {location.state.id}</h4>
+      <div>
+          <Timer end_time={location.state.duration}/>
+      </div>
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">{location.state.question}</h2>
@@ -55,7 +67,7 @@ export default function Poll() {
       </Card>
 
       <div className="w-100 text-center mt-2">
-        <p> Just take me Home <Link to="/home">Home</Link> </p>
+        <p> Just take me Home <Link to="/HomeLoggedIn">Home</Link> </p>
 
       
       </div>
